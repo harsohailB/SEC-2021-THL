@@ -11,6 +11,10 @@ var debug = require("debug")("app");
 
 // models go here
 // require("./models/User");
+require("./models/User");
+require("./models/Transaction");
+require("./models/Watchlist");
+require("./models/Transaction");
 
 const mongoUri = process.env.MONGO_URI;
 
@@ -31,9 +35,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // routers go here
 var indexRouter = require("./routes/index");
+var authRouter = require("./routes/auth");
 
 // hook up routers to express app
 app.use(indexRouter);
+app.use(authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
