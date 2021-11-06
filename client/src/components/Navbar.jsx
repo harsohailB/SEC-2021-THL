@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { LOGOUT } from "../contexts/types";
+import history from "../utils/history";
 
 const Navbar = () => {
   const [user, dispatchToUser] = useContext(UserContext);
@@ -8,6 +9,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatchToUser({ type: LOGOUT, payload: user });
+    history.push("/");
   };
 
   return (
