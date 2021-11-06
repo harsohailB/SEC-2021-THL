@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 const defaultFormUser = {
   username: "",
-  password: ""
+  password: "",
+  portfolio_title: ""
 };
 
 const SignUp = () => {
@@ -42,7 +43,11 @@ const SignUp = () => {
   const [displayAlert, setDisplayAlert] = useState(false);
 
   const checkErrors = () => {
-    return formUser.username.length === 0 || formUser.password.length === 0;
+    return (
+      formUser.username.length === 0 ||
+      formUser.password.length === 0 ||
+      formUser.portfolio_title.length === 0
+    );
   };
 
   const onFormChange = (event) => {
@@ -57,6 +62,7 @@ const SignUp = () => {
     setLoading(true);
     if (!checkErrors()) {
       try {
+        console.log("sent", formUser);
         dispatchToUser(await addUser({ ...formUser }));
         // redirect
         history.push("/");
@@ -120,6 +126,21 @@ const SignUp = () => {
                 autoComplete="current-password"
                 onChange={onFormChange}
                 error={formUser.password.length === 0}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="portfolio_title"
+                label="Portfolio Title"
+                type="portfolio_title"
+                id="portfolio_title"
+                autoComplete="portfolio_title"
+                error={formUser.portfolio_title.length === 0}
+                onChange={onFormChange}
               />
             </Grid>
           </Grid>
