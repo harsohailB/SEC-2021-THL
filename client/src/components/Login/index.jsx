@@ -58,6 +58,8 @@ const Login = () => {
       //   .catch((err) => {
       //     setDisplayAlert(true);
       //   });
+      dispatchToUser({ type: LOGIN, payload: formUser });
+      history.push("/");
     }
   };
 
