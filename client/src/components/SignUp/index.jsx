@@ -13,6 +13,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { addUser } from "../../actions/user";
 import { UserContext } from "../../contexts/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,16 +27,13 @@ const useStyles = makeStyles((theme) => ({
 
 const defaultFormUser = {
   username: "",
-  name: "",
-  password: "",
-  age: "",
-  description: ""
+  password: ""
 };
 
 const SignUp = () => {
   const classes = useStyles();
 
-  const [user] = useContext(UserContext);
+  const [user, dispatchToUser] = useContext(UserContext);
   const history = useHistory();
 
   // State Management
@@ -43,14 +41,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
 
-  const hasErrors = () => {
-    return (
-      formUser.username.length === 0 ||
-      formUser.name.length === 0 ||
-      formUser.password.length === 0 ||
-      formUser.age.length === 0 ||
-      formUser.description.length === 0
-    );
+  const checkErrors = () => {
+    return formUser.username.length === 0 || formUser.password.length === 0;
   };
 
   const onFormChange = (event) => {
@@ -60,11 +52,19 @@ const SignUp = () => {
     });
   };
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    if (!hasErrors()) {
-      setLoading(true);
+    setLoading(true);
+    if (!checkErrors()) {
+      try {
+        dispatchToUser(await addUser({ ...formUser }));
+        // redirect
+        history.push("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
+    setLoading(false);
   };
 
   return user ? (

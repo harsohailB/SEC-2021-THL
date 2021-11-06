@@ -39,7 +39,10 @@ const Navbar = () => {
               <a className="mx-4 hidden md:flex" href="Watchlist">
                 Watchlist
               </a>
-              <span className="mx-4 hidden md:flex" onClick={handleLogout}>
+              <span
+                className="mx-4 hidden md:flex cursor-pointer"
+                onClick={handleLogout}
+              >
                 Logout
               </span>
             </div>
