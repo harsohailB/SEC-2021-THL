@@ -4,35 +4,27 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CheckIcon from "@material-ui/icons/Check";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  }
-}));
+import { useStyles } from "../../utils/styles";
 
 const Watchlist = () => {
   const classes = useStyles();
   const fakeWatchlistData = [
     {
       ticker: "AAPL",
-      price: 123.33
+      price: 123.33,
     },
     {
       ticker: "TSLA",
-      price: 1232.33
+      price: 1232.33,
     },
     {
       ticker: "BTC",
-      price: 1223.33
+      price: 1223.33,
     },
     {
       ticker: "ETH",
-      price: 3232.33
-    }
+      price: 3232.33,
+    },
   ];
 
   const [input, setInput] = useState("");

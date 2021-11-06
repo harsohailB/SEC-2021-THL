@@ -39,6 +39,9 @@ const Navbar = () => {
               <a className="mx-4 hidden md:flex" href="Watchlist">
                 Watchlist
               </a>
+              <a className="mx-4 hidden md:flex" href="profit-loss">
+                Profit/Loss Algorithm
+              </a>
               <span
                 className="mx-4 hidden md:flex cursor-pointer"
                 onClick={handleLogout}
