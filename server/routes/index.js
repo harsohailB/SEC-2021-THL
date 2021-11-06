@@ -1,6 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
+// Database imports
+const mongoose = require("mongoose");
+const WatchList = mongoose.model("watchlist");
+
+// Internal imports
+const { SUCCESS, NOT_FOUND } = require("../utils/http");
+
 //1. Import coingecko-api
 const CoinGecko = require('coingecko-api');
 
@@ -45,13 +52,55 @@ router.get("/coins/history/:coinId/:startDate/:endDate", async function (req, re
 
 
 /* Add to watchlist API */
-router.get("/watchlist/add", async function (req, res) {
+router.post("/watchlist/add", async (req, res) => {
   // adding coins to be tracked by user
+  const { id, ticker } = req.query;
+
+  let foundWatchList = await WatchList.findOne({ user: id });
+
+  if (!foundWatchList) {
+    foundWatchList = new WatchList({ user: id, tickers: []});
+  }
+
+  if (!foundWatchList.tickers.includes(ticker)) {
+    foundWatchList.tickers.push(ticker);
+    foundWatchList.save();
+  }
+
+  res.status(SUCCESS).send({ data: foundWatchList });
 });
+
+router.delete("/watchlist/add", async (req, res) => {
+  const { id, ticker } = req.query;
+
+  let foundWatchList = await WatchList.findOne({ user: id });
+
+  if (!foundWatchList) {
+    res.status(NOT_FOUND).send({ data: "Watch list not found" });
+  }
+
+  if (!foundWatchList.tickers.includes(ticker)) {
+    res.status(NOT_FOUND).send({ data: "Ticker not found"});
+  }
+
+  foundWatchList.tickers.pull(ticker);
+  foundWatchList.save();
+
+  res.status(SUCCESS).send({ data: foundWatchList });
+})
 
 /* Retrieve coins in watchlist API */
 router.get("/watchlist/list", async function (req, res) {
+  const { id } = req.query;
 
+  let foundWatchList = await WatchList.findOne({ user: id });
+
+  if (!foundWatchList) {
+    foundWatchList = new WatchList({ user: id, tickers: []});
+    foundWatchList.save();
+  }
+
+  res.status(SUCCESS).send({_data: foundWatchList });
 });
 
 

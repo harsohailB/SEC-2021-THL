@@ -7,7 +7,7 @@ const symbols = new Schema({
 });
 
 const portfolio = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "users" },
+    user: { type: Schema.Types.ObjectId, ref: "users", autopopulate: "true" },
     portfolio_title: String,
     coins: [symbols]
 });
