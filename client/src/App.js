@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Watchlist from "./components/Watchlist";
 import Portfolio from "./components/Portfolio";
+import ProfitLoss from "./components/ProfitLoss";
 import { LOGIN } from "./contexts/types";
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/signup" exact component={SignUp} />
             <Route path="/portfolio" exact component={Portfolio} />
             <Route path="/watchlist" exact component={Watchlist} />
+            <Route path="/profit-loss" exact component={ProfitLoss} />
             <Route path="/" exact component={HomePage} />
           </Switch>
         </Suspense>

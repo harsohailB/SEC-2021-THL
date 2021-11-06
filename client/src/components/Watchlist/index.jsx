@@ -4,15 +4,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CheckIcon from "@material-ui/icons/Check";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  }
-}));
+import { useStyles } from "../../utils/styles";
 
 const Watchlist = () => {
   const classes = useStyles();
