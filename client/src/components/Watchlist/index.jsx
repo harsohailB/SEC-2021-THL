@@ -18,20 +18,8 @@ const Watchlist = () => {
   const classes = useStyles();
   const fakeWatchlistData = [
     {
-      ticker: "AAPL",
+      coinId: "bitcoin",
       price: 123.33
-    },
-    {
-      ticker: "TSLA",
-      price: 1232.33
-    },
-    {
-      ticker: "BTC",
-      price: 1223.33
-    },
-    {
-      ticker: "ETH",
-      price: 3232.33
     }
   ];
 
@@ -40,7 +28,7 @@ const Watchlist = () => {
 
   const renderWatchlistEntries = () => {
     return fakeWatchlistData.map((entryData) => (
-      <WatchlistEntry ticker={entryData.ticker} price={entryData.price} />
+      <WatchlistEntry coinId={entryData.coinId} price={entryData.price} />
     ));
   };
 
