@@ -5,8 +5,8 @@ import { Grid, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CheckIcon from "@material-ui/icons/Check";
 
-import { getCoin } from "../../actions/coin"
-import { addToWatchlist, getWatchlist } from "../../actions/user"
+import { getCoin } from "../../actions/coin";
+import { addToWatchlist, getWatchlist } from "../../actions/user";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,26 +27,32 @@ const Watchlist = () => {
   const userId = localStorage.getItem("id");
 
   const renderWatchlistEntries = () => {
-    return fakeWatchlistData.map((entryData) => (
+    return watchlist.map((entryData) => (
       <WatchlistEntry coinId={entryData.ticker} price={entryData.price} />
     ));
   };
 
   useEffect(() => {
-    getWatchlist(userId.substring(1, userId.length-1)).then(res => setWatchlist(res.payload._data.tickers));
-  }, [])
+    getWatchlist(userId.substring(1, userId.length - 1)).then((res) =>
+      setWatchlist(res.payload._data.tickers)
+    );
+  }, []);
 
   const submitForm = async (e) => {
     // console.log(userId)
     // Call API to see if it is valid ticker
-    getCoin(input).then(res => {
-      if(res.payload.data.error) {
-        console.log("invalid tag")
+    getCoin(input).then((res) => {
+      if (res.payload.data.error) {
+        console.log("invalid tag");
       } else {
-        addToWatchlist(userId.substring(1, userId.length-1), res.payload.data.symbol.toUpperCase(), res.payload.data.market_data.current_price.cad);
+        addToWatchlist(
+          userId.substring(1, userId.length - 1),
+          res.payload.data.symbol.toUpperCase(),
+          res.payload.data.market_data.current_price.cad
+        );
         setModified(!modified);
       }
-    })
+    });
 
     // console.log(localStorage.getItem("user"))
     // console.log(result);
