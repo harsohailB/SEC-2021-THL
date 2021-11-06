@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const watchlist = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "users", autopopulate: "true" },
-    tickers: [String]
+    tickers: [Object]
 });
 
 mongoose.model("watchlist", watchlist);

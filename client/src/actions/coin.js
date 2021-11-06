@@ -34,3 +34,27 @@ export const getCoinHistory = async (coinId) => {
   // update store with user info if successfully registered
   return response.data;
 };
+
+// import config from "../config";
+
+export const getCoin = async(coinId) => {
+  const response = await axios.get("/coins/search/" + coinId);
+
+  if (response.status !== 200) {
+    throw "Retrieval failed with error code " + response.status;
+  }
+
+  // update store with user info if successfully registered
+  return { payload: response.data };
+};
+
+export const allCoins = async() => {
+    const response = await axios.get("/coins/list");
+
+    if (response.status !== 200) {
+      throw "Retrieval failed with error code " + response.status;
+    }
+  
+    // update store with user info if successfully registered
+    return { payload: response.data };
+}
