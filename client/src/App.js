@@ -8,6 +8,7 @@ import { LinearProgress } from "@material-ui/core";
 import history from "./utils/history";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Suspense fallback={<LinearProgress />}>
           <Switch>
             <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={SignUp} />
             <Route path="/" exact component={HomePage} />
           </Switch>
         </Suspense>
