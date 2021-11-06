@@ -1,7 +1,11 @@
 import React from "react";
 
 const Portfolio = () => {
-  return <h1>Portfolio Page</h1>;
+  return (
+    <div className="flex flex-col">
+      <h1 className="text-5xl font-extrabold">Portfolio</h1>
+    </div>
+  );
 };
 
 export default Portfolio;
