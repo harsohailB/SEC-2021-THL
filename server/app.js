@@ -36,10 +36,12 @@ app.use(express.static(path.join(__dirname, "public")));
 // routers go here
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
+var userRouter = require("./routes/users");
 
 // hook up routers to express app
 app.use(indexRouter);
 app.use(authRouter);
+app.use(userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
