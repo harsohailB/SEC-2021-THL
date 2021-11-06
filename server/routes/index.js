@@ -32,7 +32,7 @@ router.get("/coins/list", async function (req, res) {
 router.get("/coins/search/:coinId", async function (req, res) {
   // pass in user query into coinId sub URL, then fetch the coin that the user searched
   let response = await CoinGeckoClient.coins.fetch(req.params.coinId, {});
-
+  let price = await CoinGeckoClient.coins.fetch(req.params.coinId, {});
   res.send({ data: response.data });
 });
 
@@ -53,18 +53,17 @@ router.get("/coins/history/:coinId/:startDate/:endDate", async function (req, re
 
 
 /* Add to watchlist API */
-router.post("/watchlist/add", async (req, res) => {
+router.post("/watchlist/add/:id/:ticker/:price", async (req, res) => {
   // adding coins to be tracked by user
-  const { id, ticker } = req.query;
-
-  let foundWatchList = await WatchList.findOne({ user: id });
+  console.log(req.params.price);
+  let foundWatchList = await WatchList.findOne({ user: req.params.id });
 
   if (!foundWatchList) {
-    foundWatchList = new WatchList({ user: id, tickers: []});
+    foundWatchList = new WatchList({ user: req.params.id, tickers: []});
   }
 
-  if (!foundWatchList.tickers.includes(ticker)) {
-    foundWatchList.tickers.push(ticker);
+  if (!foundWatchList.tickers.includes(req.params.ticker)) {
+    foundWatchList.tickers.push({ticker: req.params.ticker, price: req.params.price});
     foundWatchList.save();
   }
 
@@ -91,13 +90,13 @@ router.delete("/watchlist/add", async (req, res) => {
 })
 
 /* Retrieve coins in watchlist API */
-router.get("/watchlist/list", async function (req, res) {
+router.get("/watchlist/list/:id", async function (req, res) {
   const { id } = req.query;
 
-  let foundWatchList = await WatchList.findOne({ user: id });
+  let foundWatchList = await WatchList.findOne({ user: req.params.id });
 
   if (!foundWatchList) {
-    foundWatchList = new WatchList({ user: id, tickers: []});
+    foundWatchList = new WatchList({ user: req.params.id, tickers: []});
     foundWatchList.save();
   }
 

@@ -13,6 +13,8 @@ function reducer(state, action) {
   switch (action.type) {
     case types.LOGIN:
       ls.set("user", action.payload);
+      if(action.payload)
+        ls.set("id", action.payload._id);
       return action.payload;
     case types.LOGOUT:
       ls.set("user", null);
