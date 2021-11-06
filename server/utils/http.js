@@ -1,5 +1,7 @@
 const UNAUTHORIZED = 401;
 const SUCCESS = 200;
+const NOT_FOUND = 404;
 
 exports.UNAUTHORIZED = UNAUTHORIZED;
 exports.SUCCESS = SUCCESS;
+exports.NOT_FOUND = NOT_FOUND;
