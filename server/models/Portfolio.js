@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const symbols = new Schema({
-  ticker: String,
-  quantity: String
+  coinId: String,
+  quantity: String,
+  buyPrice: Number
 });
 
 const portfolio = new Schema({

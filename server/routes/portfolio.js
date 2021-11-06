@@ -17,21 +17,4 @@ router.get("/portfolio", async (req, res) => {
   }
 });
 
-/* Check if a user exists */
-router.post("/portfolio/buy", async (req, res) => {
-  const { ticker, quantity } = req.query;
-
-  const foundUser = await User.findOne({
-    username: username,
-    password: password
-  });
-
-  if (foundUser) {
-    delete foundUser.password; // TODO: password isnt deleted
-    res.send(foundUser);
-  } else {
-    res.status(NOT_FOUND).send("User not found");
-  }
-});
-
 module.exports = router;

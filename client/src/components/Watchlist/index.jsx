@@ -27,8 +27,8 @@ const Watchlist = () => {
   const userId = localStorage.getItem("id");
 
   const renderWatchlistEntries = () => {
-    return watchlist.map((entryData) => (
-      <WatchlistEntry ticker={entryData.ticker} price={entryData.price} />
+    return fakeWatchlistData.map((entryData) => (
+      <WatchlistEntry coinId={entryData.ticker} price={entryData.price} />
     ));
   };
 
