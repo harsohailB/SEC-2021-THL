@@ -44,6 +44,7 @@ router.get("/coins/history/:coinId/:startDate/:endDate", async function (req, re
 });
 
 
+
 /* Add to watchlist API */
 router.get("/watchlist/add", async function (req, res) {
   // adding coins to be tracked by user
