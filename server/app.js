@@ -15,6 +15,7 @@ require("./models/User");
 require("./models/Transaction");
 require("./models/Watchlist");
 require("./models/Transaction");
+require("./models/Portfolio");
 
 const mongoUri = process.env.MONGO_URI;
 
@@ -37,17 +38,14 @@ app.use(express.static(path.join(__dirname, "public")));
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 var userRouter = require("./routes/users");
+var portfolioRouter = require("./routes/portfolio");
 
 // hook up routers to express app
-const routers = [
-  indexRouter,
-  authRouter,
-  userRouter
-]
+const routers = [indexRouter, authRouter, userRouter, portfolioRouter];
 for (const router of routers) {
   app.use(router);
 }
- 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
