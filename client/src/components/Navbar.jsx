@@ -3,9 +3,10 @@ import { UserContext } from "../contexts/UserContext";
 import { LOGOUT } from "../contexts/types";
 import history from "../utils/history";
 
+import logo from "../assets/images/favicon.svg";
+
 const Navbar = () => {
   const [user, dispatchToUser] = useContext(UserContext);
-  console.log("user", user);
 
   const handleLogout = () => {
     dispatchToUser({ type: LOGOUT, payload: user });
@@ -15,12 +16,16 @@ const Navbar = () => {
   return (
     <div className="flex-col flex md:flex-row items-center font-spartan pt-4 md:py-8 dark:text-white">
       <div className="flex justify-between items-center w-full mb-4 lg:mb-0">
-        <div className="flex">
-          {" "}
-          <a className="font-extrabold" href="/">
+        <div className="flex items-center">
+          <img src={logo} alt="logo" className="w-8" />
+          <a className="font-extrabold text-2xl" href="/">
             Crypto Tracker
           </a>
-          {user && <span className="ml-4">User: {user.username}</span>}
+          {user && (
+            <div className="flex ml-4">
+              <p className="text-gray-400">{user.username}</p>
+            </div>
+          )}
         </div>
 
         <div className="items-center">
