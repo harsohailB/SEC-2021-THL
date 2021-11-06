@@ -12,6 +12,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { loginUser } from "../../actions/user";
 import { LOGIN } from "../../contexts/types";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -47,19 +48,16 @@ const Login = () => {
     });
   };
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
     if (!hasErrors()) {
-      // loginUser(formUser.username, formUser.password)
-      //   .then((fetchedUser) => {
-      //     dispatchToUser(fetchedUser);
-      //     history.push("/");
-      //   })
-      //   .catch((err) => {
-      //     setDisplayAlert(true);
-      //   });
-      dispatchToUser({ type: LOGIN, payload: formUser });
-      history.push("/");
+      try {
+        dispatchToUser(await loginUser(formUser.username, formUser.password));
+        // redirect
+        history.push("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
