@@ -17,7 +17,7 @@ require("./models/Watchlist");
 require("./models/Transaction");
 require("./models/Portfolio");
 
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = "mongodb+srv://dbUser:CAggeMqZsD9t9pj3@cluster0.9afgy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 if (!mongoUri) {
   console.error("MONGO_URI environment variable not defined");
